@@ -15,8 +15,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MaterialApp(
-      debugShowCheckedModeBanner: false,
       theme: theme,
+      debugShowCheckedModeBanner: false,
       routes: {
         '/': (ctx) => const LoginScreen(),
         'home': (ctx) => const HomeScreen(),
