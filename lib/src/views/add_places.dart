@@ -44,26 +44,17 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
           padding: const EdgeInsets.all(12),
           child: Column(
             children: [
-              Row(
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.of(context).popAndPushNamed('home');
-                      },
-                      icon: const Icon(Icons.arrow_back,size:30,)),
-                  const Text('Add new place',style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),),
-                ],
-              ),
               TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Title',
-                ),
+                textInputAction: TextInputAction.next,
                 controller: _titleController,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground,
+                decoration: const InputDecoration(
+                  labelText: "Title",
+                  helperStyle: TextStyle(fontWeight: FontWeight.w100),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
@@ -78,7 +69,7 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
                 height: 16,
               ),
               ElevatedButton.icon(
-                onPressed: (){
+                onPressed: () {
                   Navigator.of(context).popAndPushNamed('home');
                 },
                 label: const Text('Add Place'),

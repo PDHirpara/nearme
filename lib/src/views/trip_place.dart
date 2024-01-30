@@ -1,32 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nearme/src/provider/favourite_places_provider.dart';
+import 'package:nearme/src/provider/saved_places_provider.dart';
+import 'package:nearme/src/views/deatil_page.dart';
 
-import 'deatil_page.dart';
-
-class FavouriteScreen extends ConsumerStatefulWidget {
-  const FavouriteScreen({super.key});
+class SavedScreen extends ConsumerStatefulWidget {
+  const SavedScreen({super.key});
 
   @override
-  ConsumerState<FavouriteScreen> createState() => _FavouriteScreenState();
+  ConsumerState<SavedScreen> createState() => _FavouriteScreenState();
 }
 
-class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
+class _FavouriteScreenState extends ConsumerState<SavedScreen> {
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    final favourites = ref.read(favouritePlaceProvider);
+    final saved = ref.read(savedPlaceProvider);
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Your Trip"),
+        centerTitle: true,
+      ),
       body: SafeArea(
-        child: favourites.isEmpty
+        child: saved.isEmpty
             ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(top: 15),
                       width: MediaQuery.of(context).size.width * 0.3,
                       height: MediaQuery.of(context).size.height * 0.15,
                       decoration: const ShapeDecoration(
@@ -34,9 +36,11 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                           side: BorderSide(width: 2, color: Color(0xFFE7E5E5)),
                         ),
                       ),
-                      child: const Icon(
-                        Icons.favorite_border_rounded,
-                        size: 80,
+                      child: const Center(
+                        child: Icon(
+                          Icons.bookmark_border,
+                          size: 80,
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -55,7 +59,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                       height: 10,
                     ),
                     const Text(
-                      'Start Building your travel Wishlist by saving\ninspiring destinations and Experiences  ',
+                      'Start Building your travel Plan by saving\ninspiring destinations and Experiences  ',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Color(0xFF5F5C5C),
@@ -88,12 +92,11 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                     ),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: favourites.length,
+                        itemCount: saved.length,
                         itemBuilder: (context, index) => GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (ctx) =>
-                                    DetailPage(c: favourites[index])));
+                                builder: (ctx) => DetailPage(c: saved[index])));
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(
@@ -124,8 +127,8 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                                     height: h * 0.25,
                                     decoration: ShapeDecoration(
                                       image: DecorationImage(
-                                        image: NetworkImage(
-                                            favourites[index].imageUrl),
+                                        image:
+                                            NetworkImage(saved[index].imageUrl),
                                         fit: BoxFit.fill,
                                       ),
                                       shape: RoundedRectangleBorder(
@@ -149,7 +152,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                                             SizedBox(
                                               width: w * 0.3,
                                               child: Text(
-                                                favourites[index].title,
+                                                saved[index].title,
                                                 style: const TextStyle(
                                                   fontSize: 20,
                                                   fontFamily: 'Roboto',
@@ -168,11 +171,10 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                                               onPressed: () {
                                                 setState(() {
                                                   ref
-                                                      .read(
-                                                          favouritePlaceProvider
-                                                              .notifier)
-                                                      .deleteFavouritePlace(
-                                                          favourites[index]);
+                                                      .read(savedPlaceProvider
+                                                          .notifier)
+                                                      .deleteSavePlace(
+                                                          saved[index]);
                                                 });
                                               },
                                               icon: const Icon(
@@ -186,7 +188,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                                         SizedBox(
                                           width: w * 0.45,
                                           child: Text(
-                                            favourites[index].info,
+                                            saved[index].info,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 3,
                                             softWrap: true,
@@ -201,9 +203,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                                         Row(
                                           children: [
                                             Text(
-                                              favourites[index]
-                                                  .rating
-                                                  .toString(),
+                                              saved[index].rating.toString(),
                                               style: const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold,
@@ -216,9 +216,8 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                                                 minRating: 1,
                                                 direction: Axis.horizontal,
                                                 allowHalfRating: true,
-                                                itemCount: favourites[index]
-                                                    .rating
-                                                    .toInt(),
+                                                itemCount:
+                                                    saved[index].rating.toInt(),
                                                 itemSize: 20,
                                                 itemBuilder: (context, _) =>
                                                     const Icon(

@@ -1,32 +1,51 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nearme/src/model/bottom_navigation.dart';
 import 'package:nearme/src/views/add_places.dart';
+import 'package:nearme/src/views/customer_support.dart';
+import 'package:nearme/src/views/demo.dart';
+import 'package:nearme/src/views/favourite_places.dart';
 import 'package:nearme/src/views/forgot_password.dart';
 import 'package:nearme/src/views/home_screen.dart';
 import 'package:nearme/src/views/intro_screen.dart';
 import 'package:nearme/src/views/login_screen.dart';
+import 'package:nearme/src/views/privacy_policy.dart';
+import 'package:nearme/src/views/profile_page.dart';
 import 'package:nearme/src/views/setting_screen.dart';
 import 'package:nearme/src/views/signup_screen.dart';
 import 'package:nearme/src/views/splach_screen.dart';
+import 'package:nearme/src/views/terms_conditions.dart';
+import 'package:nearme/src/views/trip_place.dart';
 
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    MaterialApp(
-      theme: theme,
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (ctx) => const LoginScreen(),
-        'home': (ctx) => const HomeScreen(),
-        'intro': (ctx) => const IntroScreen(),
-        'login': (ctx) => const LoginScreen(),
-        'signup': (ctx) => const SignupScreen(),
-        'forgotpassword': (ctx) => const ForgotPasswordScreen(),
-        'setting': (ctx) => const SettingScreen(),
-        'add': (ctx) => const AddPlaceScreen(),
-      },
+    ProviderScope(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: theme,
+        routes: {
+          '/': (ctx) => const SplashScreen(),
+          'otp': (ctx) => const VerificationCode(),
+          'like': (ctx) => const FavouriteScreen(),
+          'bottom': (ctx) => const BottomNavigation(),
+          'trip': (ctx) => const SavedScreen(),
+          'customer': (ctx) => const CustomerSupport(),
+          'terms': (ctx) => const TermsConditions(),
+          'privacy': (ctx) => const PrivacyPolicy(),
+          'profile': (ctx) => const ProfileScreen(),
+          'home': (ctx) => const HomeScreen(),
+          'intro': (ctx) => const IntroScreen(),
+          'login': (ctx) => const LoginScreen(),
+          'signup': (ctx) => const SignupScreen(),
+          'forgotpassword': (ctx) => const ForgotPasswordScreen(),
+          'setting': (ctx) => const SettingScreen(),
+          'add': (ctx) => const AddPlaceScreen(),
+        },
+      ),
     ),
   );
 }

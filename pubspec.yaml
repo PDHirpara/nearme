@@ -49,6 +49,9 @@ dependencies:
   sqflite:
   uuid:
   jwt_decoder:
+  flutter_rating_bar:
+  animated_background:
+  riverpod:
 
 
 dev_dependencies:
@@ -80,6 +83,9 @@ flutter:
     - Assets/logo/Icon/
     - Assets/banner/
     - Assets/city/
+    - Assets/logo/
+    - Assets/Icon/
+    - Assets/profileImage/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
