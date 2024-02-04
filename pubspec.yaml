@@ -52,11 +52,18 @@ dependencies:
   flutter_rating_bar:
   animated_background:
   riverpod:
-
+  share_plus:
+  get:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons:
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "Assets/home_logo/logo.png"
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -86,6 +93,7 @@ flutter:
     - Assets/logo/
     - Assets/Icon/
     - Assets/profileImage/
+    - Assets/home_logo/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

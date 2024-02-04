@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nearme/src/views/deatil_page.dart';
 
 class CustomContainer extends StatelessWidget {
+  final String city;
   final String title;
   final String imageUrl;
   final String imageUrl1;
@@ -12,6 +13,7 @@ class CustomContainer extends StatelessWidget {
 
   const CustomContainer(
       {super.key,
+      required this.city,
       required this.title,
       required this.imageUrl,
       required this.rating,

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nearme/src/model/bottom_navigation.dart';
 import 'package:nearme/src/views/add_places.dart';
@@ -19,18 +20,21 @@ import 'package:nearme/src/views/splach_screen.dart';
 import 'package:nearme/src/views/terms_conditions.dart';
 import 'package:nearme/src/views/trip_place.dart';
 
+import 'src/views/like.dart';
+
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ProviderScope(
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme,
         routes: {
           '/': (ctx) => const SplashScreen(),
           'otp': (ctx) => const VerificationCode(),
-          'like': (ctx) => const FavouriteScreen(),
+          // 'like': (ctx) => const FavouriteScreen(),
+          'like': (ctx) => const Like(),
           'bottom': (ctx) => const BottomNavigation(),
           'trip': (ctx) => const SavedScreen(),
           'customer': (ctx) => const CustomerSupport(),
